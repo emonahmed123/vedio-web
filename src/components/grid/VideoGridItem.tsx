@@ -1,46 +1,47 @@
 import { Link } from "react-router";
 
-export default function VideoGridItem() {
+export default function VideoGridItem({ video = {} }) {
+    const { title, thumbnail, avatar, duration, channel, views, date, author } = video;
     return (
         <div className="col-span-12 sm:col-span-6 md:col-span-3 duration-300 hover:scale-[1.03]">
             <div className="w-full flex flex-col">
                 <div className="relative">
-                    <Link to="videos/1">
+                    <Link to={`videos/${video.id}`}>
                         <img
-                            src="https://i3.ytimg.com/vi/6O4s7v28nlw/maxresdefault.jpg"
+                            src={thumbnail}
                             className="w-full h-auto"
-                            alt="Some video title"
+                            alt={title}
                         />
                     </Link>
 
                     <p className="absolute right-2 bottom-2 bg-gray-900 text-gray-100 text-xs px-1 py">
-                        12:10
+                        {duration}
                     </p>
                 </div>
 
                 <div className="flex flex-row mt-2 gap-2">
-                    <a href="#" className="shrink-0">
+                    <Link to={`videos/${video.id}`} className="shrink-0">
                         <img
-                            src="https://avatars.githubusercontent.com/u/73503432?v=4"
+                            src={avatar}
                             className="rounded-full h-6 w-6"
                             alt="Learn with Sumit"
                         />
-                    </a>
+                    </Link>
 
-                    <div clas="flex flex-col">
-                        <a href="video.html">
+                    <div className="flex flex-col">
+                        <Link to={`videos/${video.id}`}>
                             <p className="text-slate-900 text-sm font-semibold">
-                                Video title
+                                {title}
                             </p>
-                        </a>
-                        <a
+                        </Link>
+                        <Link
                             className="text-gray-400 text-xs mt-2 hover:text-gray-600"
-                            href="#"
+                            to={`videos/${video.id}`}
                         >
-                            Learn with Sumit
-                        </a>
+                            {author}
+                        </Link>
                         <p className="text-gray-400 text-xs mt-1">
-                            200 views . May 3, 2022
+                            {views} views . {date}
                         </p>
                     </div>
                 </div>
